@@ -1,0 +1,1715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>homme® — Hendy Fathoni | Game Developer Portfolio</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter & Press Start 2P for 8-bit vibes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            klein: '#002FA7',
+            'klein-light': '#1849CA',
+            'klein-dark': '#002380',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            pixel: ['"Press Start 2P"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #ffffff;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #002FA7;
+      border-radius: 3px;
+    }
+
+    /* Crisp Canvas Rendering for 8-bit styling */
+    canvas {
+      image-rendering: -moz-crisp-edges;
+      image-rendering: -webkit-crisp-edges;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+    }
+
+    .border-klein-frame {
+      border: 3px solid #002FA7;
+    }
+
+    .btn-klein {
+      background-color: #002FA7;
+      color: #ffffff;
+      transition: all 0.15s ease-in-out;
+    }
+    .btn-klein:hover {
+      background-color: #1849CA;
+      transform: translateY(-1px);
+    }
+    .btn-klein:active {
+      transform: translateY(1px);
+    }
+
+    /* Subtle backdrop pattern like screen-print mesh */
+    .bg-mesh-pattern {
+      background-color: #ffffff;
+      background-image: radial-gradient(#002FA7 0.6px, transparent 0.6px);
+      background-size: 24px 24px;
+      opacity: 0.98;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-black font-sans antialiased min-h-screen py-4 md:py-8 px-2 sm:px-4 lg:px-8 selection:bg-klein selection:text-white">
+
+  <!-- OUTER BROWSER MOCKUP CONTAINER WITH YVES KLEIN BLUE BORDER -->
+  <div class="max-w-7xl mx-auto bg-white border-2 md:border-[3px] border-klein rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden transition-all duration-300">
+    
+    <!-- TOP OS/WINDOW BAR (Minimalist Klein Header Dots) -->
+    <div class="bg-klein px-4 py-2 flex items-center justify-between text-white select-none">
+      <div class="flex items-center space-x-2">
+        <span class="w-3 h-3 rounded-full bg-white opacity-90 inline-block"></span>
+        <span class="w-3 h-3 rounded-full bg-white opacity-60 inline-block"></span>
+        <span class="w-3 h-3 rounded-full bg-white opacity-30 inline-block"></span>
+        <span class="text-[11px] font-mono tracking-wider ml-2 opacity-80 uppercase hidden sm:inline-block">system.homme.dev // runtime 2026</span>
+      </div>
+      <div class="flex items-center space-x-4 text-xs font-mono">
+        <button id="soundToggleBtn" onclick="toggleAudio()" class="px-2 py-0.5 rounded bg-blue-900/40 hover:bg-white/20 transition flex items-center space-x-1.5 cursor-pointer">
+          <span id="soundIcon">🔊</span>
+          <span id="soundLabel">8-BIT SFX: ON</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- MAIN NAVBAR -->
+    <header class="w-full px-6 md:px-12 py-6 border-b border-gray-100 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center space-x-8">
+        <a href="#home" class="text-xl font-bold tracking-tight text-black hover:text-klein transition">
+          homme<span class="text-klein text-xs align-super">®</span>
+        </a>
+        <span class="hidden sm:inline-block text-sm font-medium text-gray-700 tracking-wide border-l border-gray-200 pl-6">
+          Hendy Fathoni
+        </span>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="flex items-center space-x-6 md:space-x-8 text-sm font-medium text-gray-600">
+        <a href="#work" class="text-black hover:text-klein transition">Work</a>
+        <a href="#about" class="hover:text-klein transition">About</a>
+        <a href="#notes" class="hover:text-klein transition">Notes</a>
+        <button onclick="openContactModal()" class="text-klein font-semibold hover:underline cursor-pointer">Contact</button>
+      </nav>
+    </header>
+
+    <!-- CONTENT WRAPPER -->
+    <main class="px-6 md:px-14 lg:px-16 pt-10 pb-16">
+      
+      <!-- HERO & BIO SECTION (Directly mirroring the mockup hierarchy) -->
+      <section id="home" class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 pb-14 border-b border-gray-100">
+        
+        <!-- Left Side Tag -->
+        <div class="md:col-span-2">
+          <span class="text-xs uppercase tracking-widest font-semibold text-klein block">Project</span>
+          <span class="text-xs text-gray-400 mt-1 block">Selected Works</span>
+        </div>
+
+        <!-- Center & Right Identity Content -->
+        <div class="md:col-span-10 grid grid-cols-1 lg:grid-cols-12 gap-8">
+          
+          <!-- Name Headings -->
+          <div class="lg:col-span-6">
+            <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold text-black tracking-tight leading-none">
+              homme
+            </h1>
+            <p class="text-xl sm:text-2xl text-gray-500 font-light mt-2 tracking-tight">
+              Hendy Fathoni
+            </p>
+          </div>
+
+          <!-- Description Statement -->
+          <div class="lg:col-span-6 flex items-start">
+            <p class="text-base sm:text-lg text-gray-800 font-normal leading-relaxed">
+              Game Developer & Creative Technologist. Crafting immersive experiences, tactile mechanics, and whimsical worlds. Specializing in game design, 8-bit aesthetics, and procedural game loops.
+            </p>
+          </div>
+
+          <!-- Metadata Spec Row -->
+          <div class="lg:col-span-12 grid grid-cols-2 sm:grid-cols-3 gap-6 pt-6 mt-4 border-t border-gray-100 text-xs sm:text-sm">
+            <div>
+              <span class="text-gray-400 uppercase tracking-wider block text-[11px] font-semibold">Client</span>
+              <span class="text-black font-medium mt-0.5 block">Various Projects & Indies</span>
+            </div>
+            <div>
+              <span class="text-gray-400 uppercase tracking-wider block text-[11px] font-semibold">Year</span>
+              <span class="text-black font-medium mt-0.5 block">2024–Present</span>
+            </div>
+            <div>
+              <span class="text-gray-400 uppercase tracking-wider block text-[11px] font-semibold">Type</span>
+              <span class="text-black font-medium mt-0.5 block">Game Design & Dev</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- FILTER TABS & PLAY STATUS -->
+      <div class="flex flex-wrap items-center justify-between gap-4 py-8" id="work">
+        <div class="flex items-center space-x-2">
+          <span class="text-xs font-mono uppercase text-klein bg-blue-50 px-2 py-1 rounded">Arcade Gallery</span>
+          <span class="text-xs text-gray-500 font-medium">Click "PLAY" on any card for full interactive mode</span>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="flex items-center space-x-1 sm:space-x-2 text-xs font-medium">
+          <button onclick="filterGames('all')" class="filter-btn active px-3 py-1.5 rounded-full border border-klein bg-klein text-white transition">All (6)</button>
+          <button onclick="filterGames('action')" class="filter-btn px-3 py-1.5 rounded-full border border-gray-200 text-gray-600 hover:border-klein hover:text-klein transition">Action</button>
+          <button onclick="filterGames('arcade')" class="filter-btn px-3 py-1.5 rounded-full border border-gray-200 text-gray-600 hover:border-klein hover:text-klein transition">Arcade</button>
+          <button onclick="filterGames('platformer')" class="filter-btn px-3 py-1.5 rounded-full border border-gray-200 text-gray-600 hover:border-klein hover:text-klein transition">Platformer</button>
+        </div>
+      </div>
+
+      <!-- GAME PROJECT GRID (Cards matching the 6-card layout in your mockup) -->
+      <div id="gamesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        
+        <!-- CARD 1: DUNGEON DEFENDERS -->
+        <div class="game-card group bg-white rounded-2xl border-2 border-klein overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between" data-category="action" data-game="dungeon">
+          <div class="p-4 sm:p-5 pb-0">
+            <div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-slate-900 border border-slate-200">
+              <!-- Live Preview Canvas -->
+              <canvas id="preview-dungeon" class="w-full h-full block cursor-pointer" onclick="launchGame('dungeon')"></canvas>
+              <div class="absolute top-2 right-2 bg-klein/90 text-white text-[10px] font-mono px-2 py-0.5 rounded tracking-wider uppercase">Action RPG</div>
+              <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity pointer-events-none">
+                <span class="bg-white text-klein font-pixel text-xs px-3 py-2 rounded shadow-lg uppercase">Click to Play</span>
+              </div>
+            </div>
+          </div>
+          <div class="p-4 sm:p-5 flex items-center justify-between gap-2 border-t border-gray-100 mt-4">
+            <div>
+              <h3 class="text-base font-bold text-black group-hover:text-klein transition">Dungeon Defenders</h3>
+              <p class="text-xs text-gray-500 font-mono">Knight vs Green Dragon</p>
+            </div>
+            <button onclick="launchGame('dungeon')" class="btn-klein px-4 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider">
+              Play
+            </button>
+          </div>
+        </div>
+
+        <!-- CARD 2: STAR HOPPER -->
+        <div class="game-card group bg-white rounded-2xl border-2 border-klein overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between" data-category="arcade" data-game="space">
+          <div class="p-4 sm:p-5 pb-0">
+            <div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-[#0d122b] border border-slate-200">
+              <canvas id="preview-space" class="w-full h-full block cursor-pointer" onclick="launchGame('space')"></canvas>
+              <div class="absolute top-2 right-2 bg-klein/90 text-white text-[10px] font-mono px-2 py-0.5 rounded tracking-wider uppercase">Endless Flyer</div>
+              <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity pointer-events-none">
+                <span class="bg-white text-klein font-pixel text-xs px-3 py-2 rounded shadow-lg uppercase">Click to Play</span>
+              </div>
+            </div>
+          </div>
+          <div class="p-4 sm:p-5 flex items-center justify-between gap-2 border-t border-gray-100 mt-4">
+            <div>
+              <h3 class="text-base font-bold text-black group-hover:text-klein transition">Star Hopper</h3>
+              <p class="text-xs text-gray-500 font-mono">Kawaii Rocket Space Odyssey</p>
+            </div>
+            <button onclick="launchGame('space')" class="btn-klein px-4 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider">
+              Play
+            </button>
+          </div>
+        </div>
+
+        <!-- CARD 3: PIXEL PLATFORMER -->
+        <div class="game-card group bg-white rounded-2xl border-2 border-klein overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between" data-category="platformer" data-game="platformer">
+          <div class="p-4 sm:p-5 pb-0">
+            <div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-[#78d6f8] border border-slate-200">
+              <canvas id="preview-platformer" class="w-full h-full block cursor-pointer" onclick="launchGame('platformer')"></canvas>
+              <div class="absolute top-2 right-2 bg-klein/90 text-white text-[10px] font-mono px-2 py-0.5 rounded tracking-wider uppercase">Platformer</div>
+              <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity pointer-events-none">
+                <span class="bg-white text-klein font-pixel text-xs px-3 py-2 rounded shadow-lg uppercase">Click to Play</span>
+              </div>
+            </div>
+          </div>
+          <div class="p-4 sm:p-5 flex items-center justify-between gap-2 border-t border-gray-100 mt-4">
+            <div>
+              <h3 class="text-base font-bold text-black group-hover:text-klein transition">Pixel Island Run</h3>
+              <p class="text-xs text-gray-500 font-mono">Coin Collector & Jumper</p>
+            </div>
+            <button onclick="launchGame('platformer')" class="btn-klein px-4 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider">
+              Play
+            </button>
+          </div>
+        </div>
+
+        <!-- CARD 4: CYBER NEON / LAW OR LAVER -->
+        <div class="game-card group bg-white rounded-2xl border-2 border-klein overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between" data-category="arcade" data-game="reflex">
+          <div class="p-4 sm:p-5 pb-0">
+            <div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-[#1e1e2f] border border-slate-200">
+              <canvas id="preview-reflex" class="w-full h-full block cursor-pointer" onclick="launchGame('reflex')"></canvas>
+              <div class="absolute top-2 right-2 bg-klein/90 text-white text-[10px] font-mono px-2 py-0.5 rounded tracking-wider uppercase">Reflex / Timing</div>
+              <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity pointer-events-none">
+                <span class="bg-white text-klein font-pixel text-xs px-3 py-2 rounded shadow-lg uppercase">Click to Play</span>
+              </div>
+            </div>
+          </div>
+          <div class="p-4 sm:p-5 flex items-center justify-between gap-2 border-t border-gray-100 mt-4">
+            <div>
+              <h3 class="text-base font-bold text-black group-hover:text-klein transition">Law or Laver</h3>
+              <p class="text-xs text-gray-500 font-mono">Neon Rhythm & Timing</p>
+            </div>
+            <button onclick="launchGame('reflex')" class="btn-klein px-4 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider">
+              Play
+            </button>
+          </div>
+        </div>
+
+        <!-- CARD 5: RETRO BRICK BREAKER -->
+        <div class="game-card group bg-white rounded-2xl border-2 border-klein overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between" data-category="arcade" data-game="breaker">
+          <div class="p-4 sm:p-5 pb-0">
+            <div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-[#0e1626] border border-slate-200">
+              <canvas id="preview-breaker" class="w-full h-full block cursor-pointer" onclick="launchGame('breaker')"></canvas>
+              <div class="absolute top-2 right-2 bg-klein/90 text-white text-[10px] font-mono px-2 py-0.5 rounded tracking-wider uppercase">Classic Arcade</div>
+              <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity pointer-events-none">
+                <span class="bg-white text-klein font-pixel text-xs px-3 py-2 rounded shadow-lg uppercase">Click to Play</span>
+              </div>
+            </div>
+          </div>
+          <div class="p-4 sm:p-5 flex items-center justify-between gap-2 border-t border-gray-100 mt-4">
+            <div>
+              <h3 class="text-base font-bold text-black group-hover:text-klein transition">Neon Smash</h3>
+              <p class="text-xs text-gray-500 font-mono">Paddle & Cosmic Bricks</p>
+            </div>
+            <button onclick="launchGame('breaker')" class="btn-klein px-4 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider">
+              Play
+            </button>
+          </div>
+        </div>
+
+        <!-- CARD 6: DRAGON INVASION -->
+        <div class="game-card group bg-white rounded-2xl border-2 border-klein overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between" data-category="action" data-game="shooter">
+          <div class="p-4 sm:p-5 pb-0">
+            <div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-[#152238] border border-slate-200">
+              <canvas id="preview-shooter" class="w-full h-full block cursor-pointer" onclick="launchGame('shooter')"></canvas>
+              <div class="absolute top-2 right-2 bg-klein/90 text-white text-[10px] font-mono px-2 py-0.5 rounded tracking-wider uppercase">Shooter</div>
+              <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity pointer-events-none">
+                <span class="bg-white text-klein font-pixel text-xs px-3 py-2 rounded shadow-lg uppercase">Click to Play</span>
+              </div>
+            </div>
+          </div>
+          <div class="p-4 sm:p-5 flex items-center justify-between gap-2 border-t border-gray-100 mt-4">
+            <div>
+              <h3 class="text-base font-bold text-black group-hover:text-klein transition">Sky Defenders</h3>
+              <p class="text-xs text-gray-500 font-mono">8-bit Winged Invaders</p>
+            </div>
+            <button onclick="launchGame('shooter')" class="btn-klein px-4 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider">
+              Play
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ABOUT & SKILLS SECTION -->
+      <section id="about" class="mt-20 pt-12 border-t border-gray-200 grid grid-cols-1 md:grid-cols-12 gap-8">
+        <div class="md:col-span-3">
+          <h2 class="text-xl font-bold tracking-tight text-black">About Hendy</h2>
+          <span class="text-xs text-klein font-mono mt-1 block">Creative Mind & Coder</span>
+        </div>
+        <div class="md:col-span-9 grid grid-cols-1 md:grid-cols-2 gap-8 text-sm leading-relaxed text-gray-700">
+          <p>
+            Hi, I’m <strong>Hendy Fathoni</strong> (known online as <strong>homme</strong>). I create game architectures, character animations, and quirky interactive prototypes. My philosophy focuses on fluid physical feedback ("game juice"), delightful 8-bit cartoon visuals, and engaging storytelling.
+          </p>
+          <div>
+            <h4 class="text-xs uppercase font-mono tracking-wider text-black font-bold mb-3">Core Toolset & Craft</h4>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-2.5 py-1 text-xs font-medium bg-blue-50 text-klein rounded border border-blue-200">Unity & C#</span>
+              <span class="px-2.5 py-1 text-xs font-medium bg-blue-50 text-klein rounded border border-blue-200">HTML5 Canvas & WebGL</span>
+              <span class="px-2.5 py-1 text-xs font-medium bg-blue-50 text-klein rounded border border-blue-200">Pixel Art & Aseprite</span>
+              <span class="px-2.5 py-1 text-xs font-medium bg-blue-50 text-klein rounded border border-blue-200">Game Design Docs</span>
+              <span class="px-2.5 py-1 text-xs font-medium bg-blue-50 text-klein rounded border border-blue-200">Procedural Mechanics</span>
+              <span class="px-2.5 py-1 text-xs font-medium bg-blue-50 text-klein rounded border border-blue-200">Audio Synthesis</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- DEVELOPER NOTES / LOG -->
+      <section id="notes" class="mt-16 pt-10 border-t border-gray-200">
+        <div class="flex items-center justify-between mb-6">
+          <h3 class="text-base font-bold text-black">Notes & Devlogs</h3>
+          <span class="text-xs font-mono text-gray-400">Vol. 2026.04</span>
+        </div>
+        <div class="divide-y divide-gray-100 text-xs sm:text-sm">
+          <article class="py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 hover:bg-blue-50/40 px-2 rounded transition">
+            <div class="flex items-center space-x-3">
+              <span class="text-klein font-mono text-xs font-bold">#042</span>
+              <span class="font-medium text-black">Why 8-bit cartoon animation triggers instant joy in players</span>
+            </div>
+            <span class="text-gray-400 font-mono text-xs">Nov 18, 2026</span>
+          </article>
+          <article class="py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 hover:bg-blue-50/40 px-2 rounded transition">
+            <div class="flex items-center space-x-3">
+              <span class="text-klein font-mono text-xs font-bold">#041</span>
+              <span class="font-medium text-black">Synthesizing retro laser & jump sounds with zero audio files via WebAudio</span>
+            </div>
+            <span class="text-gray-400 font-mono text-xs">Oct 30, 2026</span>
+          </article>
+          <article class="py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 hover:bg-blue-50/40 px-2 rounded transition">
+            <div class="flex items-center space-x-3">
+              <span class="text-klein font-mono text-xs font-bold">#040</span>
+              <span class="font-medium text-black">Balancing boss fights: Lessons from Green Dragon fire breath mechanics</span>
+            </div>
+            <span class="text-gray-400 font-mono text-xs">Sep 12, 2026</span>
+          </article>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t-2 border-klein px-6 md:px-14 py-8 bg-white flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-gray-500">
+      <div class="flex items-center space-x-3">
+        <span class="font-bold text-black">homme®</span>
+        <span>•</span>
+        <span>Hendy Fathoni Portfolio</span>
+      </div>
+      <div class="flex items-center space-x-6 text-gray-600">
+        <a href="https://github.com" target="_blank" class="hover:text-klein transition">GitHub</a>
+        <a href="https://twitter.com" target="_blank" class="hover:text-klein transition">Twitter/X</a>
+        <a href="https://itch.io" target="_blank" class="hover:text-klein transition">Itch.io</a>
+        <button onclick="openContactModal()" class="text-klein font-bold hover:underline">Get in Touch</button>
+      </div>
+    </footer>
+  </div>
+
+  <!-- INTERACTIVE FULL GAME MODAL -->
+  <div id="gameModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-6 transition-all duration-300">
+    <div class="bg-white border-4 border-klein rounded-2xl w-full max-w-4xl max-h-[96vh] flex flex-col overflow-hidden shadow-2xl relative">
+      
+      <!-- Modal Top Bar -->
+      <div class="bg-klein text-white px-4 py-3 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <span class="font-pixel text-xs text-yellow-300" id="modalGameTitle">GAME TITLE</span>
+          <span class="text-xs font-mono bg-blue-900/60 px-2 py-0.5 rounded" id="modalGameMode">8-BIT ARCADE</span>
+        </div>
+        <div class="flex items-center space-x-4">
+          <span class="text-xs font-mono">Score: <strong class="text-yellow-300 font-pixel" id="modalScore">0000</strong></span>
+          <button onclick="closeGameModal()" class="w-7 h-7 bg-white text-klein font-bold rounded-lg hover:bg-gray-200 flex items-center justify-center text-sm cursor-pointer transition">✕</button>
+        </div>
+      </div>
+
+      <!-- Live Interactive Game Canvas Container -->
+      <div class="relative bg-slate-950 flex-1 min-h-[340px] sm:min-h-[460px] flex items-center justify-center overflow-hidden">
+        <canvas id="activeGameCanvas" class="w-full h-full block select-none touch-none"></canvas>
+        
+        <!-- On-screen Pause or Game Over Banner -->
+        <div id="gameOverlayMsg" class="absolute inset-0 bg-black/75 hidden flex flex-col items-center justify-center text-center p-6 text-white font-pixel">
+          <h2 id="overlayTitle" class="text-xl sm:text-2xl text-red-400 mb-4 leading-normal">GAME OVER</h2>
+          <p id="overlayScoreText" class="text-xs sm:text-sm text-yellow-300 mb-6">FINAL SCORE: 0</p>
+          <button onclick="restartActiveGame()" class="btn-klein px-6 py-3 rounded-xl font-sans font-bold text-xs sm:text-sm uppercase tracking-wider shadow-lg">
+            Play Again (Press Space / Tap)
+          </button>
+        </div>
+      </div>
+
+      <!-- Bottom Interactive Controls & Instructions -->
+      <div class="bg-gray-50 border-t border-gray-200 p-4 flex flex-wrap items-center justify-between gap-4">
+        <div class="text-xs text-gray-700">
+          <span class="font-semibold text-black">Controls:</span> 
+          <span id="modalControlsGuide" class="font-mono text-gray-600">Arrow Keys to Move, Spacebar to Action.</span>
+        </div>
+        
+        <!-- Mobile / Touch Controls Overlay for Quick Taps -->
+        <div class="flex items-center space-x-2 sm:hidden">
+          <button id="touchBtnLeft" class="w-10 h-10 bg-gray-200 active:bg-klein active:text-white rounded-lg font-bold text-sm select-none">◀</button>
+          <button id="touchBtnAction" class="w-12 h-10 bg-klein text-white active:bg-blue-700 rounded-lg font-bold text-xs uppercase select-none">ACT</button>
+          <button id="touchBtnRight" class="w-10 h-10 bg-gray-200 active:bg-klein active:text-white rounded-lg font-bold text-sm select-none">▶</button>
+        </div>
+
+        <div class="flex items-center space-x-3">
+          <button onclick="restartActiveGame()" class="px-3 py-1.5 border border-gray-300 rounded-lg text-xs font-semibold text-gray-700 hover:border-klein hover:text-klein transition cursor-pointer">
+            ↺ Restart
+          </button>
+          <button onclick="closeGameModal()" class="btn-klein px-4 py-1.5 rounded-lg text-xs font-semibold cursor-pointer">
+            Exit Game
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CONTACT MODAL -->
+  <div id="contactModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white border-2 border-klein rounded-2xl w-full max-w-lg p-6 sm:p-8 shadow-2xl relative">
+      <div class="flex items-center justify-between pb-4 border-b border-gray-100">
+        <div>
+          <h3 class="text-xl font-bold text-black">Get in Touch</h3>
+          <p class="text-xs text-gray-500 font-mono mt-0.5">Hendy Fathoni / homme</p>
+        </div>
+        <button onclick="closeContactModal()" class="text-gray-400 hover:text-black font-bold text-lg">✕</button>
+      </div>
+
+      <div class="mt-6 space-y-4">
+        <p class="text-sm text-gray-700">
+          Interested in commissioning a custom game, indie game collaboration, or technical prototype? Drop me a message:
+        </p>
+        <div class="p-3 bg-blue-50 border border-blue-200 rounded-xl flex items-center justify-between">
+          <span class="text-xs sm:text-sm font-mono text-klein font-semibold" id="emailText">hendy.fathoni@example.com</span>
+          <button onclick="copyEmail()" class="btn-klein px-3 py-1 rounded text-xs font-bold uppercase">Copy</button>
+        </div>
+        <div id="copyNotify" class="text-[11px] text-green-600 font-mono hidden">✓ Email copied to clipboard!</div>
+      </div>
+
+      <div class="mt-8 flex justify-end">
+        <button onclick="closeContactModal()" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-lg text-xs font-semibold transition">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT: SOUND ENGINE, MINI-GAME ENGINES & PREVIEWS -->
+  <script>
+    /* ========================================================
+       1. SYNTHESIZED 8-BIT SOUND ENGINE (Web Audio API)
+       ======================================================== */
+    let audioCtx = null;
+    let soundEnabled = true;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    function playTone(freq, type, duration, slideFreq = null) {
+      if (!soundEnabled) return;
+      try {
+        initAudio();
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type || 'square';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        if (slideFreq) {
+          osc.frequency.exponentialRampToValueAtTime(slideFreq, audioCtx.currentTime + duration);
+        }
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {
+        console.warn('Audio not allowed yet:', e);
+      }
+    }
+
+    const SFX = {
+      jump: () => playTone(160, 'square', 0.15, 480),
+      hit: () => playTone(120, 'sawtooth', 0.12, 40),
+      coin: () => {
+        playTone(523, 'sine', 0.08);
+        setTimeout(() => playTone(784, 'sine', 0.12), 60);
+      },
+      laser: () => playTone(880, 'sawtooth', 0.15, 110),
+      explosion: () => playTone(80, 'sawtooth', 0.35, 20),
+      success: () => {
+        playTone(440, 'triangle', 0.1);
+        setTimeout(() => playTone(554, 'triangle', 0.1), 80);
+        setTimeout(() => playTone(659, 'triangle', 0.18), 160);
+      }
+    };
+
+    function toggleAudio() {
+      soundEnabled = !soundEnabled;
+      const icon = document.getElementById('soundIcon');
+      const label = document.getElementById('soundLabel');
+      if (soundEnabled) {
+        icon.textContent = '🔊';
+        label.textContent = '8-BIT SFX: ON';
+        SFX.coin();
+      } else {
+        icon.textContent = '🔇';
+        label.textContent = '8-BIT SFX: OFF';
+      }
+    }
+
+    /* ========================================================
+       2. CARTOON RENDER HELPERS (8-bit cute pixel characters)
+       ======================================================== */
+    // Helper to draw cute 8-bit knight
+    function drawKnight(ctx, x, y, frame = 0, facingRight = true) {
+      ctx.save();
+      ctx.translate(x, y);
+      if (!facingRight) {
+        ctx.scale(-1, 1);
+      }
+      const bob = Math.sin(frame * 0.2) * 2;
+
+      // Shadow
+      ctx.fillStyle = 'rgba(0,0,0,0.2)';
+      ctx.beginPath();
+      ctx.ellipse(0, 14, 12, 4, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Armor Body (Silver Blue)
+      ctx.fillStyle = '#94a3b8';
+      ctx.fillRect(-8, -6 + bob, 16, 16);
+      
+      // Yves Klein Blue Cape
+      ctx.fillStyle = '#002FA7';
+      ctx.fillRect(-12, -4 + bob, 5, 14);
+
+      // Helmet
+      ctx.fillStyle = '#cbd5e1';
+      ctx.fillRect(-10, -18 + bob, 20, 14);
+      // Visor slot
+      ctx.fillStyle = '#0f172a';
+      ctx.fillRect(-6, -12 + bob, 14, 4);
+      // Red Feather plume
+      ctx.fillStyle = '#ef4444';
+      ctx.fillRect(-2, -24 + bob, 5, 7);
+
+      // Shield
+      ctx.fillStyle = '#f59e0b';
+      ctx.fillRect(-11, 0 + bob, 6, 10);
+      ctx.fillStyle = '#002FA7';
+      ctx.fillRect(-9, 2 + bob, 2, 6);
+
+      // Cute Sword
+      ctx.fillStyle = '#e2e8f0';
+      ctx.fillRect(8, -8 + bob, 4, 14);
+      ctx.fillStyle = '#78350f';
+      ctx.fillRect(7, 4 + bob, 6, 3);
+
+      ctx.restore();
+    }
+
+    // Helper to draw Green Cartoon Dragon
+    function drawDragon(ctx, x, y, frame = 0) {
+      ctx.save();
+      ctx.translate(x, y);
+      const flap = Math.sin(frame * 0.15) * 6;
+
+      // Shadow
+      ctx.fillStyle = 'rgba(0,0,0,0.25)';
+      ctx.beginPath();
+      ctx.ellipse(0, 24, 24, 6, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Wings (behind)
+      ctx.fillStyle = '#15803d';
+      ctx.beginPath();
+      ctx.moveTo(-10, -10);
+      ctx.lineTo(-30, -35 + flap);
+      ctx.lineTo(-10, -20);
+      ctx.fill();
+
+      // Body (Chubby Green)
+      ctx.fillStyle = '#22c55e';
+      ctx.beginPath();
+      ctx.ellipse(0, 4, 22, 18, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Yellow Belly
+      ctx.fillStyle = '#fef08a';
+      ctx.beginPath();
+      ctx.ellipse(-4, 6, 12, 12, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Head
+      ctx.fillStyle = '#16a34a';
+      ctx.beginPath();
+      ctx.ellipse(-14, -14, 14, 12, -0.2, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Cute big eye
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.arc(-18, -16, 5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = '#0f172a';
+      ctx.beginPath();
+      ctx.arc(-20, -16, 2.5, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Nostril / tiny smoke
+      ctx.fillStyle = '#14532d';
+      ctx.fillRect(-26, -12, 3, 3);
+
+      // Tail
+      ctx.fillStyle = '#22c55e';
+      ctx.beginPath();
+      ctx.moveTo(14, 4);
+      ctx.quadraticCurveTo(34, 4, 30, -8);
+      ctx.lineTo(20, 8);
+      ctx.fill();
+
+      ctx.restore();
+    }
+
+    // Helper to draw Kawaii Rocket
+    function drawRocket(ctx, x, y, tilt = 0, engineFlame = true) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(tilt);
+
+      // Rocket Fire
+      if (engineFlame) {
+        const flicker = Math.random() * 4;
+        ctx.fillStyle = '#f97316';
+        ctx.beginPath();
+        ctx.moveTo(-7, 16);
+        ctx.lineTo(0, 26 + flicker);
+        ctx.lineTo(7, 16);
+        ctx.fill();
+
+        ctx.fillStyle = '#facc15';
+        ctx.beginPath();
+        ctx.moveTo(-4, 16);
+        ctx.lineTo(0, 22 + flicker);
+        ctx.lineTo(4, 16);
+        ctx.fill();
+      }
+
+      // Fins (Klein Blue)
+      ctx.fillStyle = '#002FA7';
+      ctx.beginPath();
+      ctx.moveTo(-10, 8);
+      ctx.lineTo(-18, 16);
+      ctx.lineTo(-8, 16);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.moveTo(10, 8);
+      ctx.lineTo(18, 16);
+      ctx.lineTo(8, 16);
+      ctx.fill();
+
+      // Rocket Body (Chubby Cute White Capsule)
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.ellipse(0, 0, 14, 18, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = '#002FA7';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // Glass Dome Window (Cyan)
+      ctx.fillStyle = '#38bdf8';
+      ctx.beginPath();
+      ctx.arc(0, -2, 7, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Cute Eyes Inside Dome
+      ctx.fillStyle = '#09090b';
+      ctx.fillRect(-3, -3, 2, 3);
+      ctx.fillRect(2, -3, 2, 3);
+      // Blush
+      ctx.fillStyle = '#f472b6';
+      ctx.fillRect(-5, 0, 2, 1);
+      ctx.fillRect(4, 0, 2, 1);
+
+      ctx.restore();
+    }
+
+    /* ========================================================
+       3. LIVE BACKGROUND PREVIEW RENDERERS FOR CARDS
+       ======================================================== */
+    const previews = {};
+
+    function setupCardPreviews() {
+      // 1. Dungeon Defenders Preview
+      setupPreview('preview-dungeon', (ctx, width, height, t) => {
+        ctx.fillStyle = '#1e293b';
+        ctx.fillRect(0, 0, width, height);
+
+        // Dungeon stone floor
+        ctx.fillStyle = '#0f172a';
+        ctx.fillRect(0, height - 35, width, 35);
+        ctx.fillStyle = '#334155';
+        for (let i = 0; i < width; i += 30) {
+          ctx.fillRect(i, height - 35, 1, 35);
+        }
+
+        // Animated Knight
+        const kx = 45 + Math.sin(t * 0.002) * 10;
+        drawKnight(ctx, kx, height - 45, t * 0.05, true);
+
+        // Animated Dragon
+        const dx = width - 55 + Math.cos(t * 0.003) * 8;
+        drawDragon(ctx, dx, height - 55, t * 0.05);
+
+        // Fireballs traveling
+        const fx = (width - 70) - ((t * 0.15) % (width - 100));
+        ctx.fillStyle = '#ef4444';
+        ctx.beginPath();
+        ctx.arc(fx, height - 50 + Math.sin(t * 0.01) * 6, 6, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#f59e0b';
+        ctx.beginPath();
+        ctx.arc(fx + 3, height - 50 + Math.sin(t * 0.01) * 6, 3, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // 2. Star Hopper Preview
+      setupPreview('preview-space', (ctx, width, height, t) => {
+        ctx.fillStyle = '#090d21';
+        ctx.fillRect(0, 0, width, height);
+
+        // Starfield
+        ctx.fillStyle = '#ffffff';
+        for (let i = 0; i < 25; i++) {
+          const sx = (i * 37 + t * 0.02) % width;
+          const sy = (i * 29 + Math.sin(i) * 50) % height;
+          ctx.fillRect(sx, sy, (i % 3 === 0) ? 2 : 1, (i % 3 === 0) ? 2 : 1);
+        }
+
+        // Floating Gem
+        const gx = width * 0.75;
+        const gy = height * 0.4 + Math.sin(t * 0.004) * 8;
+        ctx.fillStyle = '#38bdf8';
+        ctx.beginPath();
+        ctx.moveTo(gx, gy - 7);
+        ctx.lineTo(gx + 6, gy);
+        ctx.lineTo(gx, gy + 7);
+        ctx.lineTo(gx - 6, gy);
+        ctx.fill();
+
+        // Cute Rocket
+        const ry = height * 0.5 + Math.sin(t * 0.003) * 12;
+        drawRocket(ctx, width * 0.3, ry, 0.1, true);
+      });
+
+      // 3. Platformer Preview
+      setupPreview('preview-platformer', (ctx, width, height, t) => {
+        // Sky
+        ctx.fillStyle = '#7dd3fc';
+        ctx.fillRect(0, 0, width, height);
+
+        // Clouds
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.arc((t * 0.02) % (width + 50) - 20, 25, 14, 0, Math.PI * 2);
+        ctx.arc((t * 0.02) % (width + 50) - 6, 20, 18, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Floating grass blocks
+        ctx.fillStyle = '#854d0e';
+        ctx.fillRect(20, height - 40, 70, 40);
+        ctx.fillRect(110, height - 60, 60, 60);
+        ctx.fillRect(190, height - 35, 80, 35);
+
+        ctx.fillStyle = '#22c55e';
+        ctx.fillRect(20, height - 44, 70, 8);
+        ctx.fillRect(110, height - 64, 60, 8);
+        ctx.fillRect(190, height - 39, 80, 8);
+
+        // Little Jumper character
+        const charY = height - 76 + Math.abs(Math.sin(t * 0.005)) * -22;
+        ctx.fillStyle = '#002FA7';
+        ctx.fillRect(135, charY, 14, 14);
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(143, charY + 3, 4, 4);
+
+        // Floating Coin
+        ctx.fillStyle = '#fbbf24';
+        ctx.beginPath();
+        ctx.arc(142, height - 95, 5, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // 4. Reflex / Law or Laver
+      setupPreview('preview-reflex', (ctx, width, height, t) => {
+        ctx.fillStyle = '#13111c';
+        ctx.fillRect(0, 0, width, height);
+
+        // Grid lines
+        ctx.strokeStyle = '#2d274c';
+        ctx.lineWidth = 1;
+        for (let x = 0; x < width; x += 25) {
+          ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, height); ctx.stroke();
+        }
+
+        // Pulse Circle
+        const radius = 24 + Math.sin(t * 0.008) * 8;
+        ctx.strokeStyle = '#002FA7';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.arc(width / 2, height / 2, radius, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Center cursor
+        ctx.fillStyle = '#a855f7';
+        ctx.beginPath();
+        ctx.arc(width / 2, height / 2, 7, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Orbiting beats
+        const angle = t * 0.004;
+        const ox = width / 2 + Math.cos(angle) * 45;
+        const oy = height / 2 + Math.sin(angle) * 45;
+        ctx.fillStyle = '#38bdf8';
+        ctx.fillRect(ox - 4, oy - 4, 8, 8);
+      });
+
+      // 5. Retro Brick Breaker
+      setupPreview('preview-breaker', (ctx, width, height, t) => {
+        ctx.fillStyle = '#0f172a';
+        ctx.fillRect(0, 0, width, height);
+
+        // Tiny bricks
+        const colors = ['#ef4444', '#f59e0b', '#10b981', '#002FA7'];
+        for (let r = 0; r < 4; r++) {
+          for (let c = 0; c < 6; c++) {
+            ctx.fillStyle = colors[r];
+            ctx.fillRect(15 + c * (width - 30) / 6 + 2, 16 + r * 10, (width - 30) / 6 - 4, 7);
+          }
+        }
+
+        // Paddle
+        const px = width * 0.5 + Math.sin(t * 0.003) * 35;
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(px - 22, height - 16, 44, 6);
+
+        // Ball
+        const bx = width * 0.5 + Math.sin(t * 0.004) * 40;
+        const by = height * 0.5 + Math.cos(t * 0.005) * 20;
+        ctx.fillStyle = '#facc15';
+        ctx.beginPath();
+        ctx.arc(bx, by, 4, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // 6. Sky Defenders
+      setupPreview('preview-shooter', (ctx, width, height, t) => {
+        ctx.fillStyle = '#0c1220';
+        ctx.fillRect(0, 0, width, height);
+
+        // Invaders in grid
+        for (let i = 0; i < 4; i++) {
+          const ix = 30 + i * 40 + Math.sin(t * 0.003) * 12;
+          ctx.fillStyle = '#22c55e';
+          ctx.fillRect(ix, 25, 14, 10);
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(ix + 3, 27, 2, 2);
+          ctx.fillRect(ix + 9, 27, 2, 2);
+        }
+
+        // Player Defender
+        const sx = width / 2;
+        ctx.fillStyle = '#002FA7';
+        ctx.fillRect(sx - 10, height - 20, 20, 8);
+        ctx.fillStyle = '#38bdf8';
+        ctx.fillRect(sx - 3, height - 26, 6, 6);
+
+        // Laser
+        const ly = height - 30 - ((t * 0.2) % (height - 40));
+        ctx.fillStyle = '#e11d48';
+        ctx.fillRect(sx - 1.5, ly, 3, 8);
+      });
+    }
+
+    function setupPreview(canvasId, drawFn) {
+      const cvs = document.getElementById(canvasId);
+      if (!cvs) return;
+      const ctx = cvs.getContext('2d');
+
+      function resize() {
+        cvs.width = cvs.parentElement.clientWidth;
+        cvs.height = cvs.parentElement.clientHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      let animId;
+      function loop(time) {
+        drawFn(ctx, cvs.width, cvs.height, time);
+        animId = requestAnimationFrame(loop);
+      }
+      animId = requestAnimationFrame(loop);
+      previews[canvasId] = animId;
+    }
+
+    /* ========================================================
+       4. INTERACTIVE GAME MODAL & REAL PLAYABLE GAME ENGINES
+       ======================================================== */
+    let currentActiveGame = null;
+    let gameLoopHandle = null;
+    let gameState = {};
+    const modal = document.getElementById('gameModal');
+    const activeCanvas = document.getElementById('activeGameCanvas');
+    const activeCtx = activeCanvas.getContext('2d');
+    const modalScoreEl = document.getElementById('modalScore');
+    const modalTitleEl = document.getElementById('modalGameTitle');
+    const overlayMsg = document.getElementById('gameOverlayMsg');
+    const overlayTitle = document.getElementById('overlayTitle');
+    const overlayScore = document.getElementById('overlayScoreText');
+    const controlsGuide = document.getElementById('modalControlsGuide');
+
+    // Keyboard Input State
+    const keys = {};
+    window.addEventListener('keydown', (e) => {
+      keys[e.code] = true;
+      if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Space'].includes(e.code)) {
+        if (modal && !modal.classList.contains('hidden')) {
+          e.preventDefault();
+        }
+      }
+      if (e.code === 'Space' && gameState.gameOver) {
+        restartActiveGame();
+      }
+    });
+    window.addEventListener('keyup', (e) => {
+      keys[e.code] = false;
+    });
+
+    // Mobile buttons bindings
+    document.getElementById('touchBtnLeft').addEventListener('touchstart', (e) => { e.preventDefault(); keys['ArrowLeft'] = true; });
+    document.getElementById('touchBtnLeft').addEventListener('touchend', () => { keys['ArrowLeft'] = false; });
+    document.getElementById('touchBtnRight').addEventListener('touchstart', (e) => { e.preventDefault(); keys['ArrowRight'] = true; });
+    document.getElementById('touchBtnRight').addEventListener('touchend', () => { keys['ArrowRight'] = false; });
+    document.getElementById('touchBtnAction').addEventListener('touchstart', (e) => { 
+      e.preventDefault(); 
+      keys['Space'] = true; 
+      if (gameState.gameOver) restartActiveGame();
+    });
+    document.getElementById('touchBtnAction').addEventListener('touchend', () => { keys['Space'] = false; });
+
+    function launchGame(gameType) {
+      initAudio();
+      currentActiveGame = gameType;
+      modal.classList.remove('hidden');
+      resizeActiveCanvas();
+
+      if (gameType === 'dungeon') {
+        modalTitleEl.textContent = 'DUNGEON DEFENDERS';
+        controlsGuide.textContent = 'Arrow Keys to Move/Jump, [Space] to Slash Sword.';
+        initDungeonGame();
+      } else if (gameType === 'space') {
+        modalTitleEl.textContent = 'STAR HOPPER';
+        controlsGuide.textContent = 'Arrow Keys / Touch to Steer Rocket, Collect Stars & Dodge Asteroids!';
+        initSpaceGame();
+      } else if (gameType === 'platformer') {
+        modalTitleEl.textContent = 'PIXEL ISLAND RUN';
+        controlsGuide.textContent = 'Left/Right to Run, [Up] or [Space] to Jump and collect coins.';
+        initPlatformerGame();
+      } else {
+        modalTitleEl.textContent = 'LAW OR LAVER: REFLEX';
+        controlsGuide.textContent = 'Press [Space] or Tap when the pulsing circle aligns with target!';
+        initReflexGame();
+      }
+
+      overlayMsg.classList.add('hidden');
+      startGameLoop();
+    }
+
+    function closeGameModal() {
+      modal.classList.add('hidden');
+      if (gameLoopHandle) cancelAnimationFrame(gameLoopHandle);
+      currentActiveGame = null;
+    }
+
+    function restartActiveGame() {
+      overlayMsg.classList.add('hidden');
+      if (currentActiveGame) {
+        launchGame(currentActiveGame);
+      }
+    }
+
+    function resizeActiveCanvas() {
+      const rect = activeCanvas.parentElement.getBoundingClientRect();
+      activeCanvas.width = rect.width;
+      activeCanvas.height = rect.height;
+    }
+    window.addEventListener('resize', () => {
+      if (!modal.classList.contains('hidden')) {
+        resizeActiveCanvas();
+      }
+    });
+
+    function setScore(val) {
+      gameState.score = val;
+      modalScoreEl.textContent = String(val).padStart(4, '0');
+    }
+
+    function triggerGameOver(reason) {
+      gameState.gameOver = true;
+      SFX.explosion();
+      overlayTitle.textContent = reason || 'GAME OVER';
+      overlayScore.textContent = `FINAL SCORE: ${gameState.score}`;
+      overlayMsg.classList.remove('hidden');
+    }
+
+    /* ----------------------------------------------------
+       GAME 1: DUNGEON DEFENDERS (Knight vs Green Dragon)
+       ---------------------------------------------------- */
+    function initDungeonGame() {
+      const w = activeCanvas.width;
+      const h = activeCanvas.height;
+      gameState = {
+        score: 0,
+        gameOver: false,
+        tick: 0,
+        knight: {
+          x: 80,
+          y: h - 70,
+          vx: 0,
+          vy: 0,
+          isGrounded: true,
+          facingRight: true,
+          attacking: false,
+          attackCooldown: 0,
+          hp: 3
+        },
+        dragon: {
+          x: w - 120,
+          y: h - 90,
+          hp: 10,
+          direction: 1
+        },
+        fireballs: [],
+        particles: []
+      };
+      setScore(0);
+    }
+
+    function updateDungeonGame() {
+      const w = activeCanvas.width;
+      const h = activeCanvas.height;
+      const floorY = h - 60;
+      const k = gameState.knight;
+      const d = gameState.dragon;
+
+      gameState.tick++;
+
+      // Player Movement
+      if (keys['ArrowLeft'] || keys['KeyA']) {
+        k.vx = -4;
+        k.facingRight = false;
+      } else if (keys['ArrowRight'] || keys['KeyD']) {
+        k.vx = 4;
+        k.facingRight = true;
+      } else {
+        k.vx *= 0.7;
+      }
+
+      // Jump
+      if ((keys['ArrowUp'] || keys['KeyW']) && k.isGrounded) {
+        k.vy = -12;
+        k.isGrounded = false;
+        SFX.jump();
+      }
+
+      // Attack
+      if (keys['Space'] && k.attackCooldown <= 0) {
+        k.attacking = true;
+        k.attackCooldown = 20;
+        SFX.hit();
+
+        // Hit dragon check
+        const dist = Math.abs((k.x + (k.facingRight ? 24 : -24)) - d.x);
+        if (dist < 60 && Math.abs(k.y - d.y) < 50) {
+          d.hp -= 1;
+          setScore(gameState.score + 100);
+          SFX.coin();
+          for (let p = 0; p < 8; p++) {
+            gameState.particles.push({
+              x: d.x,
+              y: d.y,
+              vx: (Math.random() - 0.5) * 6,
+              vy: (Math.random() - 0.5) * 6,
+              color: '#22c55e',
+              life: 20
+            });
+          }
+          if (d.hp <= 0) {
+            SFX.success();
+            triggerGameOver('VICTORY! DRAGON DEFEATED');
+            return;
+          }
+        }
+      }
+      if (k.attackCooldown > 0) k.attackCooldown--;
+      if (k.attackCooldown < 10) k.attacking = false;
+
+      // Physics
+      k.vy += 0.65; // gravity
+      k.x += k.vx;
+      k.y += k.vy;
+
+      if (k.x < 20) k.x = 20;
+      if (k.x > w - 40) k.x = w - 40;
+      if (k.y >= floorY) {
+        k.y = floorY;
+        k.vy = 0;
+        k.isGrounded = true;
+      }
+
+      // Dragon AI: float & shoot fireballs
+      d.y = (h - 100) + Math.sin(gameState.tick * 0.05) * 20;
+      if (gameState.tick % 80 === 0) {
+        SFX.laser();
+        gameState.fireballs.push({
+          x: d.x - 20,
+          y: d.y - 10,
+          vx: -5.5,
+          vy: (Math.random() - 0.5) * 2
+        });
+      }
+
+      // Update Fireballs
+      for (let i = gameState.fireballs.length - 1; i >= 0; i--) {
+        const f = gameState.fireballs[i];
+        f.x += f.vx;
+        f.y += f.vy;
+
+        // Collision with Knight
+        if (Math.abs(f.x - k.x) < 20 && Math.abs(f.y - k.y) < 25) {
+          gameState.fireballs.splice(i, 1);
+          k.hp -= 1;
+          SFX.hit();
+          if (k.hp <= 0) {
+            triggerGameOver('THE KNIGHT FELL');
+            return;
+          }
+          continue;
+        }
+
+        if (f.x < -20) {
+          gameState.fireballs.splice(i, 1);
+          setScore(gameState.score + 25);
+        }
+      }
+
+      // Particles
+      for (let i = gameState.particles.length - 1; i >= 0; i--) {
+        const pt = gameState.particles[i];
+        pt.x += pt.vx;
+        pt.y += pt.vy;
+        pt.life--;
+        if (pt.life <= 0) gameState.particles.splice(i, 1);
+      }
+
+      // RENDER
+      activeCtx.fillStyle = '#0f172a';
+      activeCtx.fillRect(0, 0, w, h);
+
+      // Floor
+      activeCtx.fillStyle = '#1e293b';
+      activeCtx.fillRect(0, floorY + 16, w, h - (floorY + 16));
+      activeCtx.fillStyle = '#002FA7';
+      activeCtx.fillRect(0, floorY + 14, w, 2);
+
+      // Dragon
+      drawDragon(activeCtx, d.x, d.y, gameState.tick);
+
+      // Knight
+      drawKnight(activeCtx, k.x, k.y, gameState.tick, k.facingRight);
+      if (k.attacking) {
+        activeCtx.fillStyle = '#ffffff';
+        const slashX = k.facingRight ? k.x + 18 : k.x - 26;
+        activeCtx.fillRect(slashX, k.y - 10, 14, 18);
+      }
+
+      // Fireballs
+      for (const f of gameState.fireballs) {
+        activeCtx.fillStyle = '#f97316';
+        activeCtx.beginPath();
+        activeCtx.arc(f.x, f.y, 8, 0, Math.PI * 2);
+        activeCtx.fill();
+        activeCtx.fillStyle = '#facc15';
+        activeCtx.beginPath();
+        activeCtx.arc(f.x + 2, f.y, 4, 0, Math.PI * 2);
+        activeCtx.fill();
+      }
+
+      // Particles
+      for (const pt of gameState.particles) {
+        activeCtx.fillStyle = pt.color;
+        activeCtx.fillRect(pt.x, pt.y, 4, 4);
+      }
+
+      // HUD overlay: Knight Hearts & Dragon Health
+      activeCtx.fillStyle = '#ffffff';
+      activeCtx.font = '10px "Press Start 2P"';
+      activeCtx.fillText(`HP: ${'❤️'.repeat(k.hp)}`, 16, 26);
+      activeCtx.fillText(`DRAGON: ${'🟩'.repeat(d.hp)}`, w - 210, 26);
+    }
+
+    /* ----------------------------------------------------
+       GAME 2: STAR HOPPER (Kawaii Space Rocket Odyssey)
+       ---------------------------------------------------- */
+    function initSpaceGame() {
+      const w = activeCanvas.width;
+      const h = activeCanvas.height;
+      gameState = {
+        score: 0,
+        gameOver: false,
+        tick: 0,
+        rocket: { x: w * 0.25, y: h * 0.5, vy: 0, tilt: 0 },
+        stars: [],
+        asteroids: [],
+        gems: []
+      };
+      setScore(0);
+      for (let i = 0; i < 40; i++) {
+        gameState.stars.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          speed: 1 + Math.random() * 3,
+          size: Math.random() > 0.8 ? 2 : 1
+        });
+      }
+    }
+
+    function updateSpaceGame() {
+      const w = activeCanvas.width;
+      const h = activeCanvas.height;
+      const r = gameState.rocket;
+      gameState.tick++;
+
+      // Controls
+      if (keys['ArrowUp'] || keys['KeyW']) {
+        r.vy -= 0.6;
+        r.tilt = -0.2;
+      } else if (keys['ArrowDown'] || keys['KeyS']) {
+        r.vy += 0.6;
+        r.tilt = 0.2;
+      } else {
+        r.vy *= 0.92;
+        r.tilt *= 0.85;
+      }
+
+      if (keys['ArrowLeft']) r.x -= 3;
+      if (keys['ArrowRight']) r.x += 3;
+
+      r.y += r.vy;
+      if (r.y < 30) { r.y = 30; r.vy = 0; }
+      if (r.y > h - 30) { r.y = h - 30; r.vy = 0; }
+      if (r.x < 30) r.x = 30;
+      if (r.x > w - 30) r.x = w - 30;
+
+      // Spawn Gems
+      if (gameState.tick % 70 === 0) {
+        gameState.gems.push({
+          x: w + 20,
+          y: 40 + Math.random() * (h - 80),
+          speed: 3
+        });
+      }
+
+      // Spawn Asteroids
+      if (gameState.tick % 50 === 0) {
+        gameState.asteroids.push({
+          x: w + 30,
+          y: 30 + Math.random() * (h - 60),
+          radius: 12 + Math.random() * 12,
+          speed: 3.5 + Math.random() * 2,
+          rot: 0,
+          vrot: (Math.random() - 0.5) * 0.1
+        });
+      }
+
+      // Update Gems
+      for (let i = gameState.gems.length - 1; i >= 0; i--) {
+        const gm = gameState.gems[i];
+        gm.x -= gm.speed;
+        if (Math.hypot(gm.x - r.x, gm.y - r.y) < 24) {
+          gameState.gems.splice(i, 1);
+          setScore(gameState.score + 50);
+          SFX.coin();
+          continue;
+        }
+        if (gm.x < -30) gameState.gems.splice(i, 1);
+      }
+
+      // Update Asteroids
+      for (let i = gameState.asteroids.length - 1; i >= 0; i--) {
+        const ast = gameState.asteroids[i];
+        ast.x -= ast.speed;
+        ast.rot += ast.vrot;
+
+        if (Math.hypot(ast.x - r.x, ast.y - r.y) < ast.radius + 12) {
+          triggerGameOver('ASTEROID CRASH!');
+          return;
+        }
+
+        if (ast.x < -40) {
+          gameState.asteroids.splice(i, 1);
+          setScore(gameState.score + 10);
+        }
+      }
+
+      // RENDER
+      activeCtx.fillStyle = '#080d1e';
+      activeCtx.fillRect(0, 0, w, h);
+
+      // Starfield
+      activeCtx.fillStyle = '#ffffff';
+      for (const st of gameState.stars) {
+        st.x -= st.speed;
+        if (st.x < 0) st.x = w;
+        activeCtx.fillRect(st.x, st.y, st.size, st.size);
+      }
+
+      // Gems
+      for (const gm of gameState.gems) {
+        activeCtx.fillStyle = '#38bdf8';
+        activeCtx.beginPath();
+        activeCtx.arc(gm.x, gm.y, 7, 0, Math.PI * 2);
+        activeCtx.fill();
+        activeCtx.fillStyle = '#ffffff';
+        activeCtx.fillRect(gm.x - 2, gm.y - 2, 3, 3);
+      }
+
+      // Asteroids
+      for (const ast of gameState.asteroids) {
+        activeCtx.save();
+        activeCtx.translate(ast.x, ast.y);
+        activeCtx.rotate(ast.rot);
+        activeCtx.fillStyle = '#64748b';
+        activeCtx.beginPath();
+        activeCtx.arc(0, 0, ast.radius, 0, Math.PI * 2);
+        activeCtx.fill();
+        activeCtx.fillStyle = '#475569';
+        activeCtx.fillRect(-ast.radius * 0.4, -ast.radius * 0.3, ast.radius * 0.5, ast.radius * 0.5);
+        activeCtx.restore();
+      }
+
+      // Rocket
+      drawRocket(activeCtx, r.x, r.y, r.tilt, true);
+    }
+
+    /* ----------------------------------------------------
+       GAME 3: PIXEL ISLAND RUN (Coin Platformer)
+       ---------------------------------------------------- */
+    function initPlatformerGame() {
+      const w = activeCanvas.width;
+      const h = activeCanvas.height;
+      gameState = {
+        score: 0,
+        gameOver: false,
+        tick: 0,
+        player: {
+          x: 100,
+          y: h - 100,
+          vx: 0,
+          vy: 0,
+          width: 20,
+          height: 24,
+          grounded: false
+        },
+        platforms: [
+          { x: 0, y: h - 40, w: w * 0.35, h: 40 },
+          { x: w * 0.4, y: h - 70, w: 120, h: 20 },
+          { x: w * 0.65, y: h - 110, w: 130, h: 20 },
+          { x: w * 0.25, y: h - 150, w: 110, h: 20 },
+          { x: w * 0.5, y: h - 190, w: 140, h: 20 },
+        ],
+        coins: []
+      };
+      setScore(0);
+      spawnCoins();
+    }
+
+    function spawnCoins() {
+      gameState.coins = [];
+      for (const p of gameState.platforms) {
+        gameState.coins.push({ x: p.x + p.w / 2, y: p.y - 18, collected: false });
+      }
+    }
+
+    function updatePlatformerGame() {
+      const w = activeCanvas.width;
+      const h = activeCanvas.height;
+      const p = gameState.player;
+      gameState.tick++;
+
+      // Controls
+      if (keys['ArrowLeft'] || keys['KeyA']) p.vx = -4.5;
+      else if (keys['ArrowRight'] || keys['KeyD']) p.vx = 4.5;
+      else p.vx *= 0.7;
+
+      if ((keys['ArrowUp'] || keys['KeyW'] || keys['Space']) && p.grounded) {
+        p.vy = -12;
+        p.grounded = false;
+        SFX.jump();
+      }
+
+      // Physics
+      p.vy += 0.6;
+      p.x += p.vx;
+      p.y += p.vy;
+
+      // Screen wrapping
+      if (p.x < 0) p.x = w - p.width;
+      if (p.x > w) p.x = 0;
+
+      // Platform collisions
+      p.grounded = false;
+      for (const plat of gameState.platforms) {
+        if (
+          p.x + p.width > plat.x &&
+          p.x < plat.x + plat.w &&
+          p.y + p.height >= plat.y &&
+          p.y + p.height <= plat.y + 16 &&
+          p.vy >= 0
+        ) {
+          p.y = plat.y - p.height;
+          p.vy = 0;
+          p.grounded = true;
+        }
+      }
+
+      // Bottom pit death
+      if (p.y > h) {
+        triggerGameOver('FELL OFF PLATFORM');
+        return;
+      }
+
+      // Collect Coins
+      let allCollected = true;
+      for (const c of gameState.coins) {
+        if (!c.collected) {
+          allCollected = false;
+          if (Math.hypot(c.x - (p.x + p.width / 2), c.y - (p.y + p.height / 2)) < 20) {
+            c.collected = true;
+            setScore(gameState.score + 100);
+            SFX.coin();
+          }
+        }
+      }
+
+      if (allCollected) {
+        SFX.success();
+        spawnCoins();
+        setScore(gameState.score + 250);
+      }
+
+      // RENDER
+      activeCtx.fillStyle = '#67e8f9';
+      activeCtx.fillRect(0, 0, w, h);
+
+      // Clouds
+      activeCtx.fillStyle = '#ffffff';
+      activeCtx.beginPath();
+      activeCtx.arc(100, 60, 25, 0, Math.PI * 2);
+      activeCtx.arc(130, 50, 30, 0, Math.PI * 2);
+      activeCtx.fill();
+
+      // Platforms
+      for (const plat of gameState.platforms) {
+        activeCtx.fillStyle = '#92400e';
+        activeCtx.fillRect(plat.x, plat.y, plat.w, plat.h);
+        activeCtx.fillStyle = '#22c55e';
+        activeCtx.fillRect(plat.x, plat.y, plat.w, 6);
+      }
+
+      // Coins
+      for (const c of gameState.coins) {
+        if (!c.collected) {
+          activeCtx.fillStyle = '#fbbf24';
+          activeCtx.beginPath();
+          activeCtx.arc(c.x, c.y + Math.sin(gameState.tick * 0.1) * 3, 6, 0, Math.PI * 2);
+          activeCtx.fill();
+        }
+      }
+
+      // Player Sprite
+      activeCtx.fillStyle = '#002FA7';
+      activeCtx.fillRect(p.x, p.y, p.width, p.height);
+      activeCtx.fillStyle = '#f8fafc';
+      activeCtx.fillRect(p.x + (p.vx >= 0 ? 12 : 2), p.y + 4, 5, 5);
+      activeCtx.fillStyle = '#ef4444';
+      activeCtx.fillRect(p.x + 2, p.y + p.height - 4, p.width - 4, 4);
+    }
+
+    /* ----------------------------------------------------
+       GAME 4: LAW OR LAVER (Reflex Rhythm / Timing)
+       ---------------------------------------------------- */
+    function initReflexGame() {
+      const w = activeCanvas.width;
+      const h = activeCanvas.height;
+      gameState = {
+        score: 0,
+        gameOver: false,
+        tick: 0,
+        targetRadius: 60,
+        currentRadius: 180,
+        speed: 2.2,
+        combo: 0
+      };
+      setScore(0);
+    }
+
+    function handleReflexTap() {
+      if (gameState.gameOver) {
+        restartActiveGame();
+        return;
+      }
+      const diff = Math.abs(gameState.currentRadius - gameState.targetRadius);
+      if (diff < 14) {
+        // Perfect Hit
+        SFX.coin();
+        gameState.combo++;
+        const gain = 100 * gameState.combo;
+        setScore(gameState.score + gain);
+        gameState.currentRadius = 180 + Math.random() * 40;
+        gameState.speed = 2.2 + Math.min(gameState.combo * 0.3, 4);
+      } else {
+        // Miss
+        SFX.hit();
+        triggerGameOver(`MISSED TIMING! (COMBO: ${gameState.combo})`);
+      }
+    }
+
+    function updateReflexGame() {
+      const w = activeCanvas.width;
+      const h = activeCanvas.height;
+      gameState.tick++;
+
+      gameState.currentRadius -= gameState.speed;
+      if (gameState.currentRadius < 20) {
+        // Shrunk too small without hitting
+        triggerGameOver(`TOO SLOW!`);
+        return;
+      }
+
+      if (keys['Space']) {
+        keys['Space'] = false;
+        handleReflexTap();
+      }
+
+      // RENDER
+      activeCtx.fillStyle = '#0f172a';
+      activeCtx.fillRect(0, 0, w, h);
+
+      const cx = w / 2;
+      const cy = h / 2;
+
+      // Target Zone (Klein Blue)
+      activeCtx.strokeStyle = '#002FA7';
+      activeCtx.lineWidth = 4;
+      activeCtx.beginPath();
+      activeCtx.arc(cx, cy, gameState.targetRadius, 0, Math.PI * 2);
+      activeCtx.stroke();
+
+      // Shrinking Ring
+      activeCtx.strokeStyle = '#38bdf8';
+      activeCtx.lineWidth = 3;
+      activeCtx.beginPath();
+      activeCtx.arc(cx, cy, Math.max(0, gameState.currentRadius), 0, Math.PI * 2);
+      activeCtx.stroke();
+
+      // Center Core
+      activeCtx.fillStyle = '#ffffff';
+      activeCtx.beginPath();
+      activeCtx.arc(cx, cy, 10, 0, Math.PI * 2);
+      activeCtx.fill();
+
+      // Text Instructions
+      activeCtx.fillStyle = '#94a3b8';
+      activeCtx.font = '10px "Press Start 2P"';
+      activeCtx.textAlign = 'center';
+      activeCtx.fillText(`PRESS SPACEBAR / TAP WHEN RINGS ALIGN`, cx, h - 30);
+      activeCtx.fillText(`COMBO: ${gameState.combo}X`, cx, 40);
+      activeCtx.textAlign = 'start';
+    }
+
+    // Canvas click triggers reflex tap
+    activeCanvas.addEventListener('pointerdown', (e) => {
+      if (currentActiveGame === 'reflex') {
+        handleReflexTap();
+      }
+    });
+
+    /* ----------------------------------------------------
+       MASTER GAME LOOP
+       ---------------------------------------------------- */
+    function startGameLoop() {
+      if (gameLoopHandle) cancelAnimationFrame(gameLoopHandle);
+
+      function run() {
+        if (!gameState.gameOver) {
+          if (currentActiveGame === 'dungeon') updateDungeonGame();
+          else if (currentActiveGame === 'space') updateSpaceGame();
+          else if (currentActiveGame === 'platformer') updatePlatformerGame();
+          else if (currentActiveGame === 'reflex') updateReflexGame();
+        }
+        gameLoopHandle = requestAnimationFrame(run);
+      }
+      run();
+    }
+
+    /* ========================================================
+       5. FILTERING & CONTACT MODAL LOGIC
+       ======================================================== */
+    function filterGames(category) {
+      const cards = document.querySelectorAll('.game-card');
+      const buttons = document.querySelectorAll('.filter-btn');
+
+      buttons.forEach(btn => {
+        btn.classList.remove('active', 'bg-klein', 'text-white');
+        btn.classList.add('text-gray-600', 'border-gray-200');
+      });
+      event.target.classList.add('active', 'bg-klein', 'text-white');
+      event.target.classList.remove('text-gray-600', 'border-gray-200');
+
+      cards.forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function openContactModal() {
+      document.getElementById('contactModal').classList.remove('hidden');
+    }
+    function closeContactModal() {
+      document.getElementById('contactModal').classList.add('hidden');
+    }
+    function copyEmail() {
+      const email = document.getElementById('emailText').textContent;
+      const textarea = document.createElement('textarea');
+      textarea.value = email;
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        const notify = document.getElementById('copyNotify');
+        notify.classList.remove('hidden');
+        setTimeout(() => notify.classList.add('hidden'), 2500);
+        SFX.coin();
+      } catch (err) {
+        console.error('Copy failed', err);
+      }
+      document.body.removeChild(textarea);
+    }
+
+    // Initialize all canvas previews once page loads
+    window.onload = function() {
+      setupCardPreviews();
+    };
+  </script>
+</body>
+</html>
